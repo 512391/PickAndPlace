@@ -1,7 +1,7 @@
 #include <MeMegaPi.h>
 
-const int CLAW_SPEED = 60;
-const int MOTOR_SPEED = 100;
+const int CLAW_SPEED = 75;
+const int MOTOR_SPEED = 200;
 const int ARM_SPEED = 50;
 const int INTERMEDIATE_DELAY = 1000;
 
@@ -81,7 +81,7 @@ void moveStraight(bool back)
   {
     Encoder_1.setMotorPwm(-MOTOR_SPEED);
     Encoder_2.setMotorPwm(MOTOR_SPEED);
-    delay(1500);
+    delay(1000);
     Encoder_1.setMotorPwm(0);
     Encoder_2.setMotorPwm(0);
   }
@@ -89,7 +89,7 @@ void moveStraight(bool back)
   {
     Encoder_1.setMotorPwm(MOTOR_SPEED);
     Encoder_2.setMotorPwm(-MOTOR_SPEED);
-    delay(1500);
+    delay(1000);
     Encoder_1.setMotorPwm(0);
     Encoder_2.setMotorPwm(0);
   }
@@ -101,7 +101,7 @@ void rotate(bool back)
   {
     Encoder_1.setMotorPwm(MOTOR_SPEED);
     Encoder_2.setMotorPwm(MOTOR_SPEED);
-    delay(3000);
+    delay(1800);
     Encoder_1.setMotorPwm(0);
     Encoder_2.setMotorPwm(0);
   }
@@ -109,7 +109,7 @@ void rotate(bool back)
   {
     Encoder_1.setMotorPwm(-MOTOR_SPEED);
     Encoder_2.setMotorPwm(-MOTOR_SPEED);
-    delay(3000);
+    delay(1800);
     Encoder_1.setMotorPwm(0);
     Encoder_2.setMotorPwm(0);
   }
@@ -150,7 +150,7 @@ void loop() {
   openClaw();
   while(true)
   {
-    if(ultraSensor.distanceCm() < 10)
+    if(ultraSensor.distanceCm() < 15)
     {
       closeClaw();
       delay(INTERMEDIATE_DELAY);
@@ -158,13 +158,13 @@ void loop() {
       delay(INTERMEDIATE_DELAY);
       moveStraight(false);
       delay(INTERMEDIATE_DELAY);
-      rotate(true);
+      rotate(false);
       delay(INTERMEDIATE_DELAY);
       lowerClaw();
       delay(INTERMEDIATE_DELAY);
       openClaw();
       delay(INTERMEDIATE_DELAY);
-      rotate(false);
+      rotate(true);
       delay(INTERMEDIATE_DELAY);
       moveStraight(true);
       delay(INTERMEDIATE_DELAY);
